@@ -597,6 +597,7 @@ class InternalKeyManager {
             mnemonics = generateMnemonics();
             return generateECKeyPairWithMnemonics(mnemonics, keyType);
         } catch (Throwable th ) {
+            Log.e(TAG, "generateECKeyPair",th);
             throw new OstError("ikm_geckp_1", ErrorCode.FAILED_TO_GENERATE_ETH_KEY);
         } finally {
             clearBytes(mnemonics);
@@ -623,6 +624,7 @@ class InternalKeyManager {
             hdMasterKey = Bip32ECKeyPair.generateKeyPair(seed);
             return Bip32ECKeyPair.deriveKeyPair(hdMasterKey,HD_DERIVATION_PATH_FIRST_CHILD );
         } catch (Throwable th ){
+            Log.e(TAG, "generateECKeyPairWithMnemonics", th);
             throw  new OstError("ikm_geckp_2", ErrorCode.FAILED_TO_GENERATE_ETH_KEY);
         } finally {
             clearBytes(seed);
